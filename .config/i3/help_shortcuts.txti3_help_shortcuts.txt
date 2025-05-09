@@ -1,0 +1,91 @@
+
+win + ctrl  + q		exit
+win + shift + r		restart
+win + F2			edit i3 conf (vim)
+
+====== TERMINAL ======
+win + return	run kitty	
+
+====== ROFI LAUNCHER ======
+win + d			applications
+win + c			clipboard
+win + space		win, desk,
+				apps, clipboard
+
+====== WINDOWS ======
+win + q			kill window
+
+====== WINDOWS FOCUS ======
+
+        i       ↑
+win + j   l	  ←   →
+        k       ↓
+
+win + tab			focus next	
+win + shift + tab	focus prev	
+
+====== WINDOWS MOVE ======
+
+	          i	      ↑
+win + alt + j   l   ←   →
+	          k		  ↓ 
+
+win + s			swap windows
+				(mark win as a)
+win + x			move to scratchpad
+
+win + ctrl + &		move to workspace 1
+win + ctrl + é		move to workspace 2
+win + ctrl + "		move to workspace 3
+win + ctrl + '		move to workspace 4
+win + ctrl + (		move to workspace 5
+win + ctrl + -		move to workspace 6
+win + ctrl + è		move to workspace 7
+win + ctrl + _		move to workspace 8
+win + ctrl + ç		move to workspace 9
+win + ctrl + à		move to workspace 10
+
+====== CONTAINER LAYOUT ======
+
+win + v				split horizontal
+win + h				split vertical
+win + t				split toggle
+
+====== CONTAINER LAYOUT ======
+
+win  + f			floating	on/off
+ctrl + alt + space	fullscreen	on/off
+
+====== WINDOW RESIZE ======
+
+win + r						activer
+win + r | Escape | Return	désactiver
+							(sortir du mode)
+
+  i	     ↑			grow   height		 
+j   l  ←   →		shrink width,height  
+  k	     ↓			grow   widht		 
+
+e, r, t				width 25% 50% 70% 
+
+====== WORKSAPCES ======
+
+win + &				go to workspace 1  
+win + é				go to workspace 2  
+win + "				go to workspace 3  
+win + '				go to workspace 4  
+win + (				go to workspace 5  
+win + -				go to workspace 6  
+win + è				go to workspace 7  
+win + _				go to workspace 8  
+win + ç				go to workspace 9  
+win + à				go to workspace 10 
+
+win + Ctrl + j		prev workspace 
+win + Ctrl + l	 	next workspace 
+
+
+
+
+
+
