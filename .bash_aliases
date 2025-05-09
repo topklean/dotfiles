@@ -90,3 +90,13 @@ alias hgrep='h|& grep'
 alias pause='/home/topklean/Documents/projets/pause/i3.sh >& /dev/null'
 alias pacman='sudo pacman'
 alias feh_pictures='feh -g 1280x720 ~/Pictures'
+
+
+# grep 
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+
+# ip
+alias ip='ip --color=auto'
