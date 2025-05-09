@@ -1,0 +1,56 @@
+win + shift + Enter			new split term
+win + shift + ;				toggle layout stack
+win + shift + ,				next layout
+
+win + shift + i				focus window up
+win + shift + j				focus window left
+win + shift + k				focus window down
+win + shift + l				focus window right
+
+win + shift + ctrl + i		move window up
+win + shift + ctrl + j		move window left
+win + shift + ctrl + k		move window down
+win + shift + ctrl + l		move window right
+
+win + shift + !				move window to top
+
+win + shift + alt + i		resize window taller
+win + shift + alt + k		resize window shorter
+win + shift + alt + m		resize window narrower
+win + shift + alt + h		resize window wider
+
+win + shift + backspace 	default font size
+win + shift + equal     	increase font size
+win + shift + minus     	decrease font size
+
+win + shift + v				paste from clipboard
+win + shift + c				copy to clipboard
+shift + insert				paste from selection
+
+win + shift + u				scroll line up
+win + shift + o				scroll line down
+win + shift + up			scroll line up
+win + shift + down			scroll line down
+
+win + shift + e				scroll page up
+win + shift + d				scroll page down
+win + shift + page up		scroll page up
+win + shift + page down 	scroll page down
+
+win + shift + p				show scrollback
+win + shift + home			scroll home
+win + shift + end			scroll end
+
+win + shift + alt + Enter	launch tab
+win + shift + alt + t		set tab title
+win + shift + alt + j		previous tab
+win + shift + alt + l		next tab
+win + shift + alt + d		detach window new-tab
+
+win + shift + d				detach window new os window
+
+win + shift + F2			edit config file
+win + shift + F3     		launch tab vim ~/.vimrc
+win + shift + F5     		load config file
+win + shift + F10			close other windows in tab
+win + shift + F12			reset active
