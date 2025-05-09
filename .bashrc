@@ -190,3 +190,6 @@ export VISUAL="$(which vim)"
 FCEDIT=vim
 
 hex2dec() { [[ $1 ]] && (( 16#$1 != 0 )) && echo $(( 16#$1 )); }
+
+
+# c'est pour le super porduit GIT !!!!
