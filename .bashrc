@@ -71,13 +71,13 @@ if [ "$color_prompt" = yes ]; then
     info_color='\[\033[1;34m\]'
     skull_color='\[\033[;91m\]'
 #     prompt_symbol=㉿
-#         prompt_symbol=🧬
-		prompt_symbol=☠︎︎
+#         prompt_symbol='🧬'
+		prompt_symbol='☠︎︎'
     if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
         prompt_color='\[\033[;94m\]'
         info_color='\[\033[1;31m\]'
         # Skull emoji for root terminal
-		prompt_symbol=💀
+		prompt_symbol='💀'
     fi
     case "$PROMPT_ALTERNATIVE" in
         twoline)
@@ -112,17 +112,10 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
+fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -145,7 +138,13 @@ fi
 #
 setxkbmap -option "nbsp:none"
 # shopt -s autocd
-gh_prj() { (( $# < 2 )) && { echo "gh_prj <project_name> <file_name_to_import>"; return 1; }; /usr/bin/ghidra-analyzeHeadless $PWD "$1"  -import "$2" && /usr/bin/ghidra "$(pwd)/$1.gpr"; }
+gh_prj() { 
+	(( $# < 2 )) && { 
+		echo "gh_prj <project_name> <file_name_to_import>";
+			return 1;
+		};
+	/usr/bin/ghidra-analyzeHeadless $PWD "$1"  -import "$2" && /usr/bin/ghidra "$(pwd)/$1.gpr";
+}
 
 export PROMPT_COMMAND=( echo 'printf "\033[0;35m─\033[0m%.0s" $(seq -s" " 1 $(( $(stty size|cut -d" " -f2)  -4)) )' 'echo' )
 
@@ -161,3 +160,11 @@ FCEDIT=vim
 
 hex2dec() { [[ $1 ]] && (( 16#$1 != 0 )) && echo $(( 16#$1 )); }
 
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
