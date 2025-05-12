@@ -589,9 +589,13 @@ nmap <silent> <F2> :ALEDisable<cr>
 nnoremap <leader>o :call append(line('.'), '')<CR>
 nnoremap <leader>O :call append(line('.')-1, '')<CR>
 
-" inverser les touches
+" inverser deux lettres
 nnoremap <silent> œ xp
 
 
 " réduire la latence raccourci
 " set ttimeoutlen=100
+
+" nbsp in insert mode
+inoremap <silent>   <space>
+       
