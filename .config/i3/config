@@ -1,4 +1,4 @@
-# i3 config file (v4)
+#  config file (v4)
 #
 # topklean
 #
@@ -385,7 +385,7 @@ mode "$mode_launcher" {
 	bindsym Return mode "default"
 	bindsym $alt+space mode "default"
 }
-
+hide_edge_borders smart
 default_border pixel 3
 
 # bindsym $mod+Shift+l exec ~/left.sh
@@ -448,3 +448,5 @@ bindsym Print exec flameshot screen
 
 # pavucontrol
 for_window [class="pavucontrol"] floating enable;
+# glava
+for_window [class="Glava"] ·default_border·pixel·0
