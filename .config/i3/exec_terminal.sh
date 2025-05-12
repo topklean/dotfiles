@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 delay=${1}
 direction=${2}
