@@ -341,7 +341,7 @@ call plug#begin()
 " Plug 'rust-lang/rust.vim'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'szw/vim-ctrlspace'
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " Plug 'https://github.com/vim-syntastic/syntastic.git'
 " Plug 'vim-ctrlspace/vim-ctrlspace'
 " Plug 'https://github.com/vim-ctrlspace/vim-ctrlspace.git'
@@ -462,6 +462,7 @@ nnoremap <silent> <leader>bc :bd<cr>
 "new empty buffer
 nnoremap <silent> <leader>bn :enew<cr>
 
+" buffer prev/next
 " 8a : ctrl+alt+j
 " 8c : ctrl+alt+l
 nnoremap <silent>  :bn<cr>
@@ -598,4 +599,9 @@ nnoremap <silent> œ xp
 
 " nbsp in insert mode
 inoremap <silent>   <space>
-       
+      
+" golang
+" shift+k (K) for in popup window
+let g:go_doc_popup_window = 1
+" doc in floting
+"

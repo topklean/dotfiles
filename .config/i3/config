@@ -50,7 +50,7 @@ exec --no-startup-id flameshot
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i ~/Pictures/topklean_anonym.png
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i ~/Pictures/topklean_anonym_blur.png
 # bindsym $mod+shift+l exec i3lock --nofork -i ~/Pictures/topklean_anonym.png
 
 
@@ -218,8 +218,57 @@ bindsym $mod+F2 exec $terminal --detach -e vim ~/.config/i3/config;
 
 # Mode (vim like shortcuts)
 
-# window resize
 
+# mode : all modes access
+set $mode_mode mode_mode: [u]ser [w]indow [r]esize [d]efault
+
+bindsym $mod+m mode "$mode_mode"
+
+mode "$mode_mode" {
+# back to normal: Enter or Escape or $mod+r
+	bindsym u mode "$mode_user"
+	bindsym w mode "$mode_window"
+	bindsym r mode "$mode_resize"
+	bindsym d mode "default"
+	bindsym q mode "default"
+	bindsym m mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym ctrl+c mode "default"
+	bindsym $mod+q mode "default"
+	bindsym ctrl+space mode "default"
+}
+
+# user / lock/exit/poweroff/reboot
+set $mode_user [e]xit [l]ock [r]eboot [s]hutdown [f]orget (go to [m]ode selection)
+bindsym $mod+u mode "$mode_user"
+
+mode "$mode_user" {
+#     bindsym s
+	bindsym e mode "default"; exec i3-msg exit
+	bindsym l mode "default"; exec i3lock --nofork -i ~/Pictures/topklean_anonym_blur.png
+	bindsym r mode "default"; exec systemctl reboot
+	bindsym s mode "default"; exec systemctl poweroff
+
+# go to other mode
+	bindsym m mode "$mode_mode"
+	bindsym shift+r mode "$mode_resize"
+	bindsym w mode "$mode_window"
+
+# back to normal: Enter or Escape or $mod+r
+#
+	bindsym f mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym ctrl+c mode "default"
+	bindsym q mode "default"
+	bindsym $mod+q mode "default"
+	bindsym $mod+w mode "default"
+	bindsym $mod+r mode "default"
+	bindsym ctrl+space mode "default"
+}
+
+# window resize
 set $mode_resize resize|(min) ijkl|(max) S+ijkl|(width 25 50 70) ert 
 bindsym $mod+r mode "$mode_resize"
 
@@ -258,6 +307,7 @@ mode "$mode_resize" {
 # go to window mode
 	bindsym m mode "$mode_mode"
 	bindsym w mode "$mode_window"
+	bindsym u mode "$mode_power"
 
 # back to normal: Enter or Escape or $mod+r
 	bindsym Return mode "default"
@@ -272,7 +322,7 @@ mode "$mode_resize" {
 }
 
 # window move
-set $mode_window window |focus ijkl|move a+ijkl|wrks &...à|split hvt|float f|fullscreen C+A+return|kill q|quit w,Return,Esc|
+set $mode_window win: focus ijkl|move alt+ijkl|wrks [shift+] &...à|split hvt|[f]loat|fullscreen C+A+return|[k]ill q|mode murd
 bindsym $mod+w mode "$mode_window"
 
 mode "$mode_window" {
@@ -316,58 +366,53 @@ mode "$mode_window" {
 	bindsym f floating toggle
 
 # enter fullscreen mode for the focused container
+	bindsym $mod+w mode "default"; fullscreen toggle;
 	bindsym ctrl+$alt+Return fullscreen toggle
 
-# move to worspace
-	bindsym ampersand	move container to workspace number $ws1;workspace $ws1; exec --no-startup-id feh --bg-$ws1_wp
-	bindsym eacute		move container to workspace number $ws2;workspace $ws2; exec --no-startup-id feh --bg-$ws2_wp
-	bindsym quotedbl	move container to workspace number $ws3;workspace $ws3; exec --no-startup-id feh --bg-$ws3_wp
-	bindsym apostrophe	move container to workspace number $ws4;workspace $ws4; exec --no-startup-id feh --bg-$ws4_wp
-	bindsym parenleft	move container to workspace number $ws5;workspace $ws5; exec --no-startup-id feh --bg-$ws5_wp
-	bindsym minus		move container to workspace number $ws6;workspace $ws6; exec --no-startup-id feh --bg-$ws6_wp
-	bindsym egrave		move container to workspace number $ws7;workspace $ws7; exec --no-startup-id feh --bg-$ws7_wp
-	bindsym underscore	move container to workspace number $ws8;workspace $ws8; exec --no-startup-id feh --bg-$ws8_wp
-	bindsym ccedilla	move container to workspace number $ws9;workspace $ws9; exec --no-startup-id feh --bg-$ws9_wp
-	bindsym agrave		move container to workspace number $ws10;workspace $ws10; exec --no-startup-id feh --bg-$ws10_wp
+# move to worspace and follow / exit mode
+	bindsym ampersand	mode "default"; move container to workspace number $ws1;workspace $ws1; exec --no-startup-id feh --bg-$ws1_wp
+	bindsym eacute		mode "default"; move container to workspace number $ws2;workspace $ws2; exec --no-startup-id feh --bg-$ws2_wp
+	bindsym quotedbl	mode "default"; move container to workspace number $ws3;workspace $ws3; exec --no-startup-id feh --bg-$ws3_wp
+	bindsym apostrophe	mode "default"; move container to workspace number $ws4;workspace $ws4; exec --no-startup-id feh --bg-$ws4_wp
+	bindsym parenleft	mode "default"; move container to workspace number $ws5;workspace $ws5; exec --no-startup-id feh --bg-$ws5_wp
+	bindsym minus		mode "default"; move container to workspace number $ws6;workspace $ws6; exec --no-startup-id feh --bg-$ws6_wp
+	bindsym egrave		mode "default"; move container to workspace number $ws7;workspace $ws7; exec --no-startup-id feh --bg-$ws7_wp
+	bindsym underscore	mode "default"; move container to workspace number $ws8;workspace $ws8; exec --no-startup-id feh --bg-$ws8_wp
+	bindsym ccedilla	mode "default"; move container to workspace number $ws9;workspace $ws9; exec --no-startup-id feh --bg-$ws9_wp
+	bindsym agrave		mode "default"; move container to workspace number $ws10;workspace $ws10; exec --no-startup-id feh --bg-$ws10_wp
 
+	# move to worspace and don't follow / exit mode
+	bindsym shift+ampersand	 mode "default"; move container to workspace number $ws1
+	bindsym shift+eacute	 mode "default"; move container to workspace number $ws2
+	bindsym shift+quotedbl	 mode "default"; move container to workspace number $ws3
+	bindsym shift+apostrophe mode "default"; move container to workspace number $ws4
+	bindsym shift+parenleft	 mode "default"; move container to workspace number $ws5
+	bindsym shift+minus		 mode "default"; move container to workspace number $ws6
+	bindsym shift+egrave	 mode "default"; move container to workspace number $ws7
+	bindsym shift+underscore mode "default"; move container to workspace number $ws8
+	bindsym shift+ccedilla	 mode "default"; move container to workspace number $ws9
+	bindsym shift+agrave	 mode "default"; move container to workspace number $ws10
 
 # kill window
 	bindsym k kill
+	bindsym q kill
 
-# go to resize mode
+# go to other mode
 	bindsym m mode "$mode_mode"
+	bindsym u mode "$mode_user"
 	bindsym r mode "$mode_resize"
 
 # back to normal: Enter or Escape or $mod+r
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-	bindsym ctrl+c mode "default"
-	bindsym q mode "default"
-	bindsym $mod+q mode "default"
-	bindsym $mod+w mode "default"
-	bindsym w mode "default"
-	bindsym ctrl+space mode "default"
-}
-
-
-# window move
-set $mode_mode mode_mode: [w]indow [r]esize [d]efault
-
-bindsym $mod+m mode "$mode_mode"
-
-mode "$mode_mode" {
-# back to normal: Enter or Escape or $mod+r
-	bindsym w mode "$mode_window"
-	bindsym r mode "$mode_resize"
 	bindsym d mode "default"
-	bindsym q mode "default"
-	bindsym m mode "default"
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 	bindsym ctrl+c mode "default"
 	bindsym $mod+q mode "default"
+#     bindsym $mod+w mode "default"
+#     bindsym w mode "default"
 	bindsym ctrl+space mode "default"
 }
+
 # bindsym F5 resize set width 25 ppt
 # bindsym F6 resize set width 50 ppt
 # bindsym F7 resize set width 70 ppt
