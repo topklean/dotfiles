@@ -79,7 +79,7 @@ alias pp='xclip -selection c -o'
 # alias pause='clear; toilet -w 200 -f pagga < <(echo -e "                                  \npause de 10 mins     \n                                  ")'
 # alias fzf="fzf -i -m --bind='alt-i:up,alt-k:down'"
 # alias fzf='fzf -i --bind=\'alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char\' --height=~50% --reverse --border=rounded --border-label=\"$(lolcat -f<<<$PWD)\" --margin=1,2% --color=dark --preview=\'batcat -l java {+}\''
-alias fzf="fzf -i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
+# alias fzf="fzf -i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
 
 # mod exec
 alias x='chmod u+x'

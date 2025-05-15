@@ -392,7 +392,9 @@ let g:airline#extensions#syntastic#enabled=1
 " fzf
 " Initialize configuration dictionary
 let g:fzf_vim = {}
-let g:fzf_preview_window = ['right,50%', 'ctrl-b']
+" --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'
+let g:fzf_vim = { 'bind': ['alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'] }
+let g:fzf_preview_window = ['right,58%', 'ctrl-b']
 
 " ALE
 " let b:ale_fixers = ['', 'prettier', 'eslint']
@@ -490,8 +492,8 @@ vmap <leader>tt :!toilet -w 200 -F border -f term<CR>
 " inoremap <silent> <F3> ✓
 " nnoremap <silent> <F3> <esc>r✓
 " vnoremap <silent> <F3> <esc>r✓
-inoremap  <F3> ✅
-" nnoremap <silent> <S-F3> <esc>r✅
+nnoremap  <silent> <leader><F3> ✅
+nnoremap <silent> <S-F3> ✅
 " vnoremap <silent> <S-F3> <esc>r✅
 
 " telescope

@@ -26,7 +26,13 @@
 "\ek": next-history
 "\ej": backward-char
 "\el": forward-char
+"\C-j": nop
+# "\C-m": nop
 "\e\C-j": backward-word
-"\e\C-l": forward-word
 # "\eu": backward-word
+"\e\C-l": forward-word
 # "\eo": forward-word
+"\eo": kill-word
+"\eu": backward-kill-word
+"\C-o": delete-char
+"\C-u": backward-delete-char
