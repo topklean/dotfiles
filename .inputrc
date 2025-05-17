@@ -1,38 +1,24 @@
-# "\e<": beginning-of-history
-# "\e\C-i": dynamic-complete-history
-# "\e>": end-of-history
-# fetch-history (not bound)
-# "\C-s": forward-search-history
-# history-and-alias-expand-line (not bound)
-# "\e^": history-expand-line
-# "\e[5~": history-search-backward
-# "\e[6~": history-search-forward
-# history-substring-search-backward (not bound)
-# history-substring-search-forward (not bound)
-# "\C-n": next-history
-# "\eOB": next-history
-# "\e[B": next-history
-# "\en": non-incremental-forward-search-history
-# non-incremental-forward-search-history-again (not bound)
-# "\ep": non-incremental-reverse-search-history
-# non-incremental-reverse-search-history-again (not bound)
-# "\C-p": previous-history
-# "\eOA": previous-history
-# "\e[A": previous-history
-# "\C-r": reverse-search-history
-# vi-fetch-history (not bound)
+# get the Meta Control syntax
 
-"\ei": previous-history
-"\ek": next-history
-"\ej": backward-char
-"\el": forward-char
-"\C-j": nop
-# "\C-m": nop
-"\e\C-j": backward-word
-# "\eu": backward-word
-"\e\C-l": forward-word
-# "\eo": forward-word
-"\eo": kill-word
-"\eu": backward-kill-word
-"\C-o": delete-char
-"\C-u": backward-delete-char
+
+set convert-meta on
+
+# move
+Meta-i: previous-history
+Meta-k: next-history
+Meta-j: backward-char
+Meta-l: forward-char
+
+Meta-Control-j: backward-word
+Meta-Control-l: forward-word
+
+Meta-o: kill-word
+Meta-u: backward-kill-word
+
+Control-o: delete-char
+Control-u: backward-delete-char
+Control-h: kill-whole-line
+
+Control-SPACE: accept-line
+# snippet
+# à faire

@@ -53,6 +53,7 @@
 
 /* Window background color (RGB format).
    Does not work with `setopacity "xroot"` */
+// #request setbg 00000000
 #request setbg 00000000
 
 /* (X11 only) EWMH Window type. Possible values are:
@@ -150,7 +151,7 @@
    by pulseaudio, and require transformations to be re-applied
    (thus being a good measure of how much work your CPU has to
    perform over time) */
-// #request setprintframes true
+#request setprintframes false
 
 /* PulseAudio sample buffer size. Lower values result in more
    frequent audio updates (also depends on sampling rate), but

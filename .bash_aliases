@@ -100,3 +100,6 @@ alias diff='diff --color=auto'
 
 # ip
 alias ip='ip --color=auto'
+
+# glava for streaming
+alias mic='ps aux | grep [p]olybar|grep [b]as|awk "{print \$2}" | xargs -n1 kill -9;( polybar -q bas >&/dev/null & ); (pkill glava; glava -d >&/dev/null &); (pkill screenkey; screenkey &)'

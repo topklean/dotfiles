@@ -168,3 +168,18 @@ hex2dec() { [[ $1 ]] && (( 16#$1 != 0 )) && echo $(( 16#$1 )); }
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# fzf
+
+### end: completion.bash ###
+# topklean options
+# source <(fzf --bash)
+# export FZF_CTRL_T_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
+# export FZF_CTRL_R_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
+# export FZF_CTRL_C_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
+# export FZF_ALT_C_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
+
+# - $FZF_CTRL_T_OPTS
+# - $FZF_CTRL_R_OPTS
+# - $FZF_ALT_C_COMMAND
+# - $FZF_ALT_C_OPTS
