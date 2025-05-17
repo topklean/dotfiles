@@ -25,7 +25,7 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = 300
+    width = (200, 300)
 
     # The height of a single notification, excluding the frame.
     # dynamic height from 0 to 300
@@ -41,7 +41,7 @@
     # Offset from the origin
     # NOTE: Dunst from version 1.11 and older use this alternative notation
     # offset = 10x50
-    offset = (20, 60)
+    offset = (15, 45)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 1.2
@@ -89,19 +89,19 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 0
+    transparency = 15
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
     # If gap_size is greater than 0, this setting will be ignored.
-    separator_height = 2
+    separator_height = 1
 
     # Padding between text and separator.
-    padding = 8
+    padding = 5
 
     # Horizontal padding.
-    horizontal_padding = 8
+    horizontal_padding = 5
 
     # Padding between text and icon.
     text_icon_padding = 0
@@ -117,7 +117,7 @@
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.
     # Click events on gaps do not currently propagate to applications below.
-    gap_size = 0
+    gap_size = 1
 
     # Define a color for the separator.
     # possible values are:
