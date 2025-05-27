@@ -42,13 +42,8 @@ set smartindent
 " backspace pour inclure début ligne et tab
 set backspace=indent,eol,start
 
-" leader key => space / pour les raccourcies
-let mapleader = " "
 " activation de la surbrillance pour la recherche
 set hlsearch
-" map to leader leader to switch
-" nnoremap <silent> <Space><Space> :nohlsearch<Bar>:echo<CR>
-nnoremap <silent> <leader><leader> :nohlsearch<Bar>:echo<CR>
 " recherche incrémental 
 set incsearch
 
@@ -150,16 +145,9 @@ set fillchars+=vert:│
 "set paste
 "set pastetoggle=tk
 
-"nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-
 " no spell by default
 set nospell
-nnoremap <silent> <leader>ss :set spell!<cr>
-nnoremap <silent> <leader>sl ]s
-nnoremap <silent> <leader>sj [s
-nnoremap <silent> <leader>sf z=
 
-" nnoremap <leader>s :set spell!<cr>
 
 " rust
 " let g:rust_fold=2 
@@ -234,71 +222,6 @@ iabbrev lorem!
 \voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem
 \eum fugiat quo voluptas nulla pariatur?
 
-" keyboard shortcuts
-" inoremap	<silent> <F10>	<ESC>:Vex<CR><CTRL-w>-5
-"
-" F2: enregistré et repasser en mode insertion
-inoremap <silent> <F2>	<ESC>:w<CR>":i<CR>
-
-
-"noremap <F4> :set hlsearch! hlsearch?<CR>
-"nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-
-" mouvement, main droite style gaming 
-"   i        ↑
-" j   l    ←   →
-"   k        ↓
-noremap i k
-noremap k j
-noremap j h
-noremap h i
-
-" on remap i vers h
-nnoremap <S-h> <S-i>
-vnoremap <S-h> <S-i>
-
-" on désactive i
-nnoremap <S-i> nop
-vnoremap <S-i> nop
-
-inoremap <C-h> nop
-" nnoremap <Tab> \>\>_
-" nnoremap <S-Tab> \<\<_
-"inoremap <S-Tab> <C-D>
-"inoremap <Tab> <C-T>
-vnoremap <tab> >
-vnoremap <s-tab> <
-" mouvement alt+ en mode insertion
-inoremap <M-i> <up>
-inoremap <M-k> <down>
-inoremap <M-j> <left>
-inoremap <M-l> <right>
-"commande mode
-cnoremap <m-k> <down>
-cnoremap <m-j> <left>
-cnoremap <m-l> <right>
-cnoremap <m-i> <up>
-
-" move
-inoremap <M-u> <PageUp>
-inoremap <M-o> <PageDown>
-" inoremap <C-M-j> <S-left>
-" inoremap <C-M-l> <S-right>
-" vnoremap <C-M-j> <S-left>
-" vnoremap <C-M-l> <S-right>
-" déplacement des lignes vers le haut et le bas
-nnoremap <C-i> :m .-2<CR>==
-nnoremap <C-k> :m .+1<CR>==
-vnoremap <C-i> :m '<-2<CR>gv=gv
-vnoremap <C-k> :m '>+1<CR>gv=gv
-
-inoremap <A-S-K> <Esc>:m .+1<CR>==gi
-inoremap <A-S-I> <Esc>:m .-2<CR>==gi
-
-" echape in insertmode
-inoremap <C-cr> <ESC>
-inoremap <C-space> <ESC>
-map <C-space> <ESC>
 
 " file manager vim netrw
 " au FileType netrw nmap <buffer> i i
@@ -392,14 +315,12 @@ let g:airline#extensions#syntastic#enabled=1
 " fzf
 " Initialize configuration dictionary
 let g:fzf_vim = {}
-" --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'
-let g:fzf_vim = { 'bind': ['alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'] }
-let g:fzf_preview_window = ['right,58%', 'ctrl-b']
-
+" let g:fzf_vim.default_options = '--bind="alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char"'
+" let g:fzf_vim.buffers_options = '--bind="alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char"'
+" let g:fzf_vim = { 'bind': ['alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'] }
+let g:fzf_preview_window = ['hidden,right,<50(down,40%)', 'ctrl-b']
 " ALE
-" let b:ale_fixers = ['', 'prettier', 'eslint']
 let g:ale_pattern_options_enabled=1
-" let g:ale_floating_window_border = repeat([''], 8)
 let g:ale_floating_window_border=['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 let g:ale_cursor_detail=1
 let g:ale_virtualtext_cursor=1
@@ -418,13 +339,6 @@ let g:ale_save_hidden=1
 
 let g:ale_linters = { 'go': ['gopls'] }
 
-" ale (linter)
-nmap <silent> <A-l> <Plug>(ale_previous)
-nmap <silent> <A-m> <Plug>(ale_next)
-nnoremap <silent> <leader>ad <Plug>(ale_go_to_definition_in_split)
-nnoremap <silent> <leader>af :ALEFindReferences -split<cr>
-nnoremap <silent> <leader>ar :ALERename<cr>
-nnoremap <silent> <leader>ac :ALEComplete<cr>
 
 
 " NERDTree
@@ -439,24 +353,144 @@ nnoremap <silent> <leader>ac :ALEComplete<cr>
 " disable mode display
 " set noshowmode
 
-" macro
-" fold a function / bloc
-let @z='V][zf'
-nnoremap <leader>z @z
-
-" entourer un mot {} () [] '' "" en mode normal
-map <leader>{ bi{<esc>ea}<esc>
-map <leader>( bi(<esc>ea)<esc>
-map <leader>[ bi[<esc>ea]<esc>
-map <leader>' bi'<esc>ea'<esc>
-map <leader>" bi"<esc>ea"<esc>
 
 
-"fzf
-nnoremap <silent> <C-f> :Files<CR>
 " nnoremap <silent> <leader>fb :Buffers<CR>
 
+" ?????
+set wildcharm=<C-Z>
+" nnoremap <F10> :b <C-Z>
+
+" nmap <silent> <F5> :set relativenumber! number! showmode! showcmd! hidden! ruler!<CR> :set laststatus=0<CR>
+" nmap <silent> <F6> :set relativenumber! number! showmode! showcmd! hidden! ruler!<CR> :set laststatus=2<CR>
+" réduire la latence raccourci
+"
+" set ttimeoutlen=100
+
+" golang
+" shift+k (K) for in popup window
+let g:go_doc_popup_window = 1
+" doc in floting
+"
+
+"""""""""""""""""""
+"                 "
+"    SHORTCUTS    "
+"                 "
+"""""""""""""""""""
+
+" inserttion : i => h
+noremap h i
+"  remap Shift Insert
+nnoremap <S-h> <S-i>
+vnoremap <S-h> <S-i>
+" disable old mapping
+nnoremap <S-i> <Nop>
+vnoremap <S-i> <Nop>
+
+" disable delete back char
+noremap <C-h> <Nop>
+
+" disable insert new line ????
+" disable down ????
+inoremap <C-j> <Nop>
+noremap <C-j> <Nop>
+
+
+" Motion, gaming style, right hand
+"   i        ↑
+" j   l    ←   →
+"   k        ↓
+
+" normal mode
+noremap i <up>
+noremap k <down>
+noremap j <left>
+noremap l <right>
+
+" with ALT (META) / same as in insert mode 
+nnoremap <M-i> <up>
+nnoremap <M-k> <down>
+nnoremap <M-j> <left>
+nnoremap <M-l> <right>
+
+" Insert mode
+inoremap <M-i> <up>
+inoremap <M-k> <down>
+inoremap <M-j> <left>
+inoremap <M-l> <right>
+
+"commande mode mouvement
+cnoremap <M-i> <up>
+cnoremap <M-k> <down>
+cnoremap <M-j> <left>
+cnoremap <M-l> <right>
+
+" page up/down all mod
+inoremap <M-u> <PageUp>
+inoremap <M-o> <PageDown>
+nnoremap <M-u> <PageUp>
+nnoremap <M-o> <PageDown>
+vnoremap <M-u> <PageUp>
+vnoremap <M-o> <PageDown>
+
+" Begin and End of file
+inoremap <silent> <A-S-u> <C-o>gg
+inoremap <silent> <A-S-o> <C-o>G
+
+" back and forward  word
+inoremap <C-j> <S-left>
+inoremap <C-l> <S-right>
+nnoremap <C-j> <S-left>
+nnoremap <C-l> <S-right>
+vnoremap <C-j> <S-left>
+vnoremap <C-l> <S-right>
+cnoremap <C-j> <S-left>
+cnoremap <C-l> <S-right>
+
+" tab
+" nnoremap <Tab> \>\>_
+" nnoremap <S-Tab> \<\<_
+"inoremap <S-Tab> <C-D>
+"inoremap <Tab> <C-T>
+vnoremap <tab> >
+vnoremap <s-tab> <
+
+" déplacement des lignes vers le haut et le bas
+nnoremap <C-i> :m .-2<CR>==
+nnoremap <C-k> :m .+1<CR>==
+vnoremap <C-i> :m '<-2<CR>gv=gv
+vnoremap <C-k> :m '>+1<CR>gv=gv
+
+inoremap <C-S-K> <Esc>:m .+1<CR>==gi
+inoremap <C-S-I> <Esc>:m .-2<CR>==gi
+
+" echape in insertmode
+inoremap <C-cr> <ESC>
+inoremap <C-space> <ESC>
+map <C-space> <ESC>
+
+" go to begin/end of block {}
+" be
+nnoremap <silent>F9 [{
+nnoremap <silent>F10 ][ 
+
+" leader key => space / pour les raccourcies
+let mapleader = " "
+
+" disable hlsearch
+" space+space
+nnoremap <silent> <leader><leader> :set hlsearch!<CR>
+" nnoremap <silent> <leader><leader> :nohlsearch<Bar>:echo<CR>
+
+" save
+" F2: enregistré et repasser en mode insertion
+" à retravailler
+inoremap <silent> <F2>	<ESC>:w<CR>":i<CR>
+
+
 " buffer
+" to replaced by fzf
 nnoremap <silent> <leader>b :ls<cr>:b<space>
 nnoremap <silent> <leader>l :bn<cr>
 nnoremap <silent> <leader>j :bp<cr>
@@ -469,38 +503,15 @@ nnoremap <silent> <leader>bn :enew<cr>
 " 8c : ctrl+alt+l
 nnoremap <silent>  :bn<cr>
 nnoremap <silent>  :bp<cr>
-inoremap <silent>  <esc>:bp<cr>i
 inoremap <silent>  <esc>:bn<cr>i
+inoremap <silent>  <esc>:bp<cr>i
 vnoremap <silent>  :bn<cr>
 vnoremap <silent>  :bp<cr>
+cnoremap <silent>  :bn<cr>
+cnoremap <silent>  :bp<cr>
 
-set wildcharm=<C-Z>
-nnoremap <F10> :b <C-Z>
 
-" nmap <silent> <F5> :set relativenumber! number! showmode! showcmd! hidden! ruler!<CR> :set laststatus=0<CR>
-" nmap <silent> <F6> :set relativenumber! number! showmode! showcmd! hidden! ruler!<CR> :set laststatus=2<CR>
-
-" ascii art
-vmap <leader>ts :!toilet -w 200 -F border -f standard<CR>
-vmap <leader>tp :!toilet -w 200 -f pagga<CR>
-vmap <leader>ttp :!toilet -w 200 -F border -f pagga<CR>
-vmap <leader>te :!toilet -w 200 -F border -f emboss<CR>
-vmap <leader>tr :!toilet -w 200 -F border -f term<CR>
-vmap <leader>tt :!toilet -w 200 -F border -f term<CR>
-
-" check mark
-" inoremap <silent> <F3> ✓
-" nnoremap <silent> <F3> <esc>r✓
-" vnoremap <silent> <F3> <esc>r✓
-nnoremap  <silent> <leader><F3> ✅
-nnoremap <silent> <S-F3> ✅
-" vnoremap <silent> <S-F3> <esc>r✅
-
-" telescope
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Creating splits with empty buffers in all directions
 nnoremap <Leader>wj :leftabove  vnew<CR>
@@ -512,17 +523,16 @@ nnoremap <Leader>wk :rightbelow new<CR>
 map + <C-w>+
 map - <C-w>-
 
+" shwitch case word (remember the original position. use w as marker)
+"
+nnoremap <silent> <leader>, mwg~iw`w
+nnoremap <silent> <leader>; mwgUiw`w
+nnoremap <silent> <leader>: mwguiw`w
+
 " C dev / gcc / gdb / ...
 " packadd termdebug
 let g:termdebug_wide = 1
 nnoremap <Leader>dg :Termdebug<CR>
-
-" shwitch case (remember the original position. use w as marker)
-nnoremap <silent> <leader>, mwg~iw`w
-nnoremap <silent> <leader>; mwgUiw`w
-nnoremap <silent> <leader>: mwguiw`w
-" nnoremap <leader>, bve~
-" nnoremap <leader>n g~be
 
 " leader+leader for jump to marks
 nnoremap <silent> <Leader>i '
@@ -535,28 +545,23 @@ nnoremap <silent> <Leader>kq "z
 nnoremap <silent> <Leader>ks "e
 nnoremap <silent> <Leader>kd "r
 
-" g go to...
+" g go to local definition
 nnoremap <silent> <Leader>g gd:nohls<cr>
 
 " duplicate ligne after above
 nnoremap <silent> <Leader>p <UP>yy<DOWN>p
 
 " bash add/remove trace
-" inoremap <silent> <leader>x <esc>A -x
 nnoremap <silent> <leader>x A -x<esc>
-" inoremap <silent> <leader>xd <esc>:s/ -x$//<CR>A
 nnoremap <silent> <leader>xd :s/ -x$//<CR>
-
-" inoremap <leader>xi <esc>oset  -x
-nnoremap <leader>xk oset -x<esc>
-" inoremap <leader>xk <esc>oset +x<esc>
-nnoremap <leader>xi oset +x<esc>
+nnoremap <silent> <leader>xk oset -x<esc>
+nnoremap <silent> <leader>xi oset +x<esc>
 
 " delete until next "
 nnoremap <silent> <Leader>d" dt"
-" Begin and End of file
-inoremap <silent> <C-S-i> <C-o>gg
-inoremap <silent> <C-S-k> <C-o>G
+
+" delete until next inside "
+nnoremap <silent> <Leader>di dh"
 
 " ( [ {  } ] )
 inoremap <silent> <C-,> (
@@ -568,42 +573,81 @@ inoremap <silent> <A-:> }
 
 " man
 nnoremap <silent> <S-k> <leader>K
+
 " change to dir of curent file
 nnoremap <silent> <leader>cd :lcd %:h<cr>:pwd<cr>
+
 " switch affiche char spéciaux
 map <silent> <leader>ll :set list!<cr>
-" numpad enter
-inoremap  
-cnoremap  
-vnoremap  
+
+" numpad enter ??? (à vérifier)
+" inoremap  
+" cnoremap  
+" vnoremap  
 
 " delete backword ALT-BACKSPACE
 inoremap <silent> <a-bs> <c-o>db
-
-" désactivation F1 parceque gros doigts
-inoremap <silent> <F1> <nop>    
-nnoremap <silent> <F1> <nop>    
-vnoremap <silent> <F1> <nop>    
-
-" deactivate ALE
-nmap <silent> <F2> :ALEDisable<cr>
+" cnoremap <silent> <a-bs> <c-o>db
+vnoremap <silent> <a-bs> db
+nnoremap <silent> <a-bs> bd
 
 " insert blank line before
 nnoremap <leader>o :call append(line('.'), '')<CR>
 nnoremap <leader>O :call append(line('.')-1, '')<CR>
 
 " inverser deux lettres
-nnoremap <silent> œ xp
+" nnoremap <silent> t xp
+" désactivation F1 parceque gros doigts
+inoremap <silent> <F1> <Nop>    
+nnoremap <silent> <F1> <Nop>    
+vnoremap <silent> <F1> <Nop>    
+
+" spell
+nnoremap <silent> <leader>ss :set spell!<cr>
+nnoremap <silent> <leader>sl ]s
+nnoremap <silent> <leader>sj [s
+nnoremap <silent> <leader>sf z=
+
+" ale (linter)
+" nmap <silent> <A-l> <Plug>(ale_previous)
+" nmap <silent> <A-m> <Plug>(ale_next)
+nnoremap <silent> <leader>ad <Plug>(ale_go_to_definition_in_split)
+nnoremap <silent> <leader>af :ALEFindReferences -split<cr>
+nnoremap <silent> <leader>ar :ALERename<cr>
+nnoremap <silent> <leader>ac :ALEComplete<cr>
+" deactivate ALE
+nmap <silent> <F3> :ALEDisable<cr>
+nmap <silent> <F4> :ALERename<cr>
+
+"fzf
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
+
+" entourer un mot {} () [] '' "" en mode normal
+" map <leader>{ bi{<esc>ea}<esc>
+" map <leader>( bi(<esc>ea)<esc>
+" map <leader>[ bi[<esc>ea]<esc>
+" map <leader>' bi'<esc>ea'<esc>
+" map <leader>" bi"<esc>ea"<esc>
+
+" fold a function / bloc
+let @z='V][zf'
+nnoremap <leader>z @z
 
 
-" réduire la latence raccourci
-" set ttimeoutlen=100
+" ascii art
+vmap <leader>ts :!toilet -w 200 -F border -f standard<CR>
+vmap <leader>tp :!toilet -w 200 -f pagga<CR>
+vmap <leader>ttp :!toilet -w 200 -F border -f pagga<CR>
+vmap <leader>te :!toilet -w 200 -F border -f emboss<CR>
+vmap <leader>tr :!toilet -w 200 -F border -f term<CR>
+vmap <leader>tt :!toilet -w 200 -F border -f term<CR>
 
-" nbsp in insert mode
-inoremap <silent>   <space>
-      
-" golang
-" shift+k (K) for in popup window
-let g:go_doc_popup_window = 1
-" doc in floting
-"
+
+" check mark
+" inoremap <silent> <F3> ✓
+" nnoremap <silent> <F3> <esc>r✓
+" vnoremap <silent> <F3> <esc>r✓
+" nnoremap  <silent> <leader><F3> ✅
+" nnoremap <silent> <S-F3> ✅
+" vnoremap <silent> <S-F3> <esc>r✅
