@@ -216,8 +216,22 @@ bindsym $mod+ctrl+q exec i3-msg exit
 
 bindsym $mod+F2 exec $terminal --detach -e vim ~/.config/i3/config;
 
-# Mode (vim like shortcuts)
+# hide window
+bindsym $mod+x move scratchpad
+bindsym $mod+$alt+x scratchpad show
 
+# edit config in vim 
+bindsym $mod+F1 exec feh /home/topklean/.config/i3 
+
+# swap container
+bindsym $mod+s swap container with mark "a"; mark --replace "a"
+
+
+# flameshot / screen capture
+bindsym $mod+p exec flameshot gui
+bindsym Print exec flameshot screen
+
+# Mode (vim like shortcuts)
 
 # mode : all modes access
 set $mode_mode mode_mode: [u]ser [w]indow [r]esize [d]efault
@@ -454,23 +468,7 @@ client.background       #F8F8F2
 for_window [class="feh"] floating enable
 # for_window [class="feh" title="^(?!.*/home/topklean/.config/i3)"] resize set 800 600
 
-for_window [class="sowon"] border 0
-
-# focus on window/prog title
-
-# bindsym $mod+F1 [class="firefox"] focus
-bindsym $mod+F1 exec feh /home/topklean/.config/i3 
-
-# bindsym $mod+m mark --replace "a"
-# bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
-#bindsym $mod+u exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
-# bindsym $mod+s [con_mark="^a$"] swap container with mark b
-bindsym $mod+s swap container with mark "a"; mark --replace "a"
-
-
-# afficher les marks vim
-# show_marks yes
-
+for_window [class="sowon"] border pixel 0
 
 
 # popup window in full screen mode
@@ -479,21 +477,20 @@ bindsym $mod+s swap container with mark "a"; mark --replace "a"
 # for_window [class="ghidra-Ghidra"] move container to workspace $ws10; workspace $ws10
 # for_window [class="ghidra-Ghidra" title="^(?!CodeBrowser).*"] floating enable;
 # for_window [class="ghidra-Ghidra" title="CodeBrowser.*"] fullscreen toggle;
-bindsym $mod+x move scratchpad
-bindsym $mod+$alt+x scratchpad show
 # for_window [class="ghidra-Ghidra"] floating enable
 # for_window [class="ghidra-Ghidra" title="Rename.*"] floating enable
 # for_window [class="ghidra-Ghidra" title="Reference.*|Bundle.*"] floating enable
 # for_window [class="Ghidra"][window_type=dialog] focus
 # for_window [class="ghidra-Ghidra" title="CodeBrowser.*"] fullscreen toggle global
 
-# for_window floating
+# for_window floating
 
-# flameshot / screen capture
-bindsym $mod+p exec flameshot gui
-bindsym Print exec flameshot screen
 
 # pavucontrol
-for_window [class="pavucontrol"] floating enable;
+for_window [class="pavucontrol"] floating enable
+for_window [class="pavucontrol"] border pixel 0
 # glava
-for_window [class="Glava"] default_border pixel 0
+# for_window [class="Glava"] border pixel 0
+for_window [class="Galculator"] floating enable
+for_window [class="Galculator"] border pixel 0
+no_focus [class="firefox"]

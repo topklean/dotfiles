@@ -102,5 +102,6 @@ alias diff='diff --color=auto'
 alias ip='ip --color=auto'
 
 # glava for streaming
-alias mic='ps aux | grep [p]olybar|grep [b]as|awk "{print \$2}" | xargs -n1 kill -9;( polybar -q bas >&/dev/null & ); (pkill glava; glava -d >&/dev/null &); (pkill screenkey; screenkey &)'
-alias mic_off='ps aux | grep [p]olybar|grep [b]as|awk "{print \$2}" | xargs -n1 kill -9;pkill glava; pkill screenkey'
+alias mic="pkill -f 'polybar.+bas|screenkey'; ( polybar -q bas >&/dev/null & ); (pkill glava; glava -d >&/dev/null &); (pkill screenkey; screenkey &)"
+# alias mic='ps aux | grep [p]olybar|grep [b]as|awk "{print \$2}" | xargs -n1 kill -9;( polybar -q bas >&/dev/null & ); (pkill glava; glava -d >&/dev/null &); (pkill screenkey; screenkey &)'
+alias mic_off="pkill -f 'polybar.+bas|screenkey'"

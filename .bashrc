@@ -178,6 +178,7 @@ fi
 # export FZF_CTRL_R_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
 # export FZF_CTRL_C_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
 # export FZF_ALT_C_OPTS="-i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
+export FZF_DEFAULT_OPTS='--bind="alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char"'
 
 # - $FZF_CTRL_T_OPTS
 # - $FZF_CTRL_R_OPTS
