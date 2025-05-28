@@ -279,7 +279,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'fladson/vim-kitty'
+" Plug 'fladson/vim-kitty'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'preservim/nerdtree'
 " Plug 'jlanzarotta/bufexplorer'
@@ -313,12 +313,15 @@ let g:airline#extensions#syntastic#enabled=1
 "let g:syntastic_check_on_wq = 0
 
 " fzf
+" global key mapping
+let $FZF_DEFAULT_OPTS='--bind="ctrl-i:up,CTRL-k:down,CTRL-j:backward-char,CTRL-l:forward-char,ctrl-u:backward-word,ctrl-o:forward-word,ctrl-b:backward-kill-word"'
 " Initialize configuration dictionary
 let g:fzf_vim = {}
 " let g:fzf_vim.default_options = '--bind="alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char"'
 " let g:fzf_vim.buffers_options = '--bind="alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char"'
 " let g:fzf_vim = { 'bind': ['alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'] }
-let g:fzf_preview_window = ['hidden,right,<50(down,40%)', 'ctrl-b']
+" let g:fzf_preview_window = ['hidden,right,<50(down,40%)']
+let g:fzf_preview_window = ['hidden,right,<50(down,40%)', 'ctrl-p']
 " ALE
 let g:ale_pattern_options_enabled=1
 let g:ale_floating_window_border=['│', '─', '╭', '╮', '╯', '╰', '│', '─']
