@@ -1,8 +1,10 @@
 # FZF config
 
+![Screenshot of files search](https://github.com/topklean/dotfiles/tree/main/.config/fzf/fzf_themes_files.jpg)
+
 # Installation
 
-## Function
+## Functions
 **fhelp()**  
 	 list all fzf func  
 	 3 first lines of the function must be  
