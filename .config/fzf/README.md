@@ -1,6 +1,9 @@
 # FZF config
 
-![Screenshot of files search](https://github.com/topklean/dotfiles/tree/main/.config/fzf/fzf_themes_files.jpg)
+![Screenshot of files search](fzf_themes_files.jpg)
+<picture>
+    <img="fzf_themes_files.jpg" style="width:auto">
+</picture>
 
 # Installation
 
