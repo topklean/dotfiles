@@ -149,37 +149,77 @@ export FZF_CTRL_R_OPTS+=' --info="inline-right"'
 # function
 #	all will be prefixed with f
 
+__check_cmd() {
+	# check for command to be used
+	# ls / exa
+	__cmd_ls=$(command -v exa) && {
+		__cmd_ls_nth=7
+		:
+	}|| {
+		# if fail (exa not installed)
+		# switch to ls
+		__cmd_ls="ls"
+		__cmd_ls_nth=8
+	}
+	__cmd_ls_opts="-l --color=always"
+}
+
+#get list of func available
+fhelp() {
+	# list all fzf func
+	# 3 first lines of the function must be
+	# the help
+	__label="fzf help functions"
+	__fzf_profile="$HOME/.config/fzf/.fzf_profile"
+#     set -x
+	[[ $1 == list ]] && { grep -Pi -A3 '^f[^_\s]+(?= {$)' $__fzf_profile|tr -d '{'; return 0; }
+#     set +x
+	grep -Poi '^f[^_\s]+(?=\(\) {$)' "$__fzf_profile" | fzf --border-label=" $__label " --preview='grep -Pi -A3 {}"(?=\()" '$__fzf_profile' 2>/dev/null | grep -Pio "#.+" '
+}
+
 # man
 #
 fman() {
-	#search all man
-	#arch linux and other, not every distro has this ENV VAR
+	# search all man
+	# MAN_PATH : arch linux and other, not every distro has this ENV VAR
+	#
 	if [[ -z $MAN_PATH ]]; then MAN_PATH=/usr/share/man; fi
 
-	ls "${MAN_PATH}"/man* | \
-	fzf --delimiter \. --with-nth '{1} {2}' --accept-nth '{1}.{2}' |\
-	xargs man
+#     __check_cmd
+	__label="all man"
+
+	command ls -1 "${MAN_PATH}"/man* | \
+		fzf  --border-label=" $__label " --delimiter \. --with-nth '{1} {2}' --accept-nth '{1}.{2}' --preview="man '{1}.{2}' 2>/dev/null"|\
+		xargs man
 }
 fmank() {
 	# search strings in all man
 	# $1... strings to search 
 	#
-	(( $# < 2 )) && return 1
-	man -k "$@"|fzf --delimiter '[()-]' --accept-nth='{1}.{2}'|xargs man
+	(( $# < 1 )) && return 1
+	__label="search strings in man (-k)"
+
+	man -k "$@"|fzf --border-label="$__label" --delimiter '[()-]' --accept-nth='{1}.{2}' --preview="man '{1}.{2}' 2>/dev/null"|xargs man
 }
+
 # arch package search / Management
-fyay() {
-	# search fo all files installed and get the package owner of selected ones
-	yay -Ql | fzf --multi --accept-nth='{2}' | xargs yay -Qo
+fyayOwner() {
+	# search for parckage owner of a file(s)
+	# args are prequery 
+	#
+	yay -Ql | fzf --query="$*" --multi --accept-nth='{2}' | xargs yay -Qo
 }
 fyayfilesfrompackage() {
-	# search in all package installed
-	# for the selection,  search the files of them
+	# search in all packages installed
+	# for the selection,  search the files
 	# ls the files selection
-	yay -Q|fzf --preview='yay -Ql {1}' --accept-nth='{1}' --multi|xargs yay -Ql|fzf --sync --accept-nth='{2}' --multi|xargs ls -l
+	__check_cmd
+	yay -Q|fzf --preview='yay -Ql {1}' --accept-nth='{1}' --multi|xargs yay -Ql|fzf --sync --accept-nth='{2}' --multi|xargs $__cmd_ls $__cmd_ls_opts
 }
-fyayorphan(){
+fyayorphan() {
 	# find all orphans packages and list the selected (for now)
+	#
+	#
 	yay -Qdt | \
 		fzf --multi --preview 'yay -Qi {1}' --accept-nth='{1}'	--border-label='orphanes packages'
 }
@@ -187,13 +227,25 @@ fyayorphan(){
 # files search
 #
 fsuid() {
-	find / -type f -perm /u=s 2>/dev/null | xargs exa --color=always -lG|fzf --ansi --preview='man "$(basename {7})"'
+	# find all files with suid set (not in root)
+	#
+	#
+	__check_cmd
+	find / -type f -perm /u=s 2>/dev/null | xargs $__cmd_ls $__cmd_ls_opts -G|fzf --ansi --preview="man -f $(basename {$__cmd_ls_nth}) 2>/dev/null"
 }
 fguid() {
-	find / -type f -perm /g=s 2>/dev/null | xargs exa --color=always -lG|fzf --ansi --preview='man "$(basename {7})"'
+	# find all files with guid set (not in root)
+	#
+	#
+	__check_cmd
+	find / -type f -perm /g=s 2>/dev/null | xargs $__cmd_ls $__cmd_ls_opts -U|fzf --ansi --preview="man -f $(basename {$__cmd_ls_nth}) 2>/dev/null"
 }
 fsticky() {
-	find / -type f -perm /ugo=t 2>/dev/null | xargs exa --color=always -lG|fzf --ansi --preview='man "$(basename {7})"'
+	# find all directory with stickybit set (not in root)
+	#
+	#
+	__check_cmd
+	find / -perm -perm /1000 2>/dev/null|xargs $__cmd_ls $__cmd_ls_opts -d
 }
 
 
