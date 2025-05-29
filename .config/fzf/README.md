@@ -4,9 +4,11 @@
 <picture>
     <img="fzf_themes_files.jpg" style="width:auto">
 </picture>
+![Screenshot of files search](fzf_themes_cd.jpg)
 <picture>
     <img="fzf_themes_cd.jpg" style="width:auto">
 </picture>
+![Screenshot of files search](fzf_themes_history.jpg)
 <picture>
     <img="fzf_themes_history.jpg" style="width:auto">
 </picture>
