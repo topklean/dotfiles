@@ -8,7 +8,7 @@
 # - $FZF_ALT_C_COMMAND
 # - $FZF_ALT_C_OPTS
 # - $FZF_CTRL_R_OPTS
-
+# set -x
 # topklean options
 # source bash integration (replace with yours, zsh, fish)
 [[ ! -f ~/.config/fzf/.fzfrc ]] && return 1
@@ -151,8 +151,8 @@ export FZF_CTRL_R_OPTS+=' --info="inline-right"'
 
 # man
 #
-#search all man
 fman() {
+	#search all man
 	#arch linux and other, not every distro has this ENV VAR
 	if [[ -z $MAN_PATH ]]; then MAN_PATH=/usr/share/man; fi
 
@@ -160,14 +160,41 @@ fman() {
 	fzf --delimiter \. --with-nth '{1} {2}' --accept-nth '{1}.{2}' |\
 	xargs man
 }
-# search strings in all man
 fmank() {
+	# search strings in all man
 	# $1... strings to search 
 	#
 	(( $# < 2 )) && return 1
 	man -k "$@"|fzf --delimiter '[()-]' --accept-nth='{1}.{2}'|xargs man
 }
+# arch package search / Management
+fyay() {
+	# search fo all files installed and get the package owner of selected ones
+	yay -Ql | fzf --multi --accept-nth='{2}' | xargs yay -Qo
+}
+fyayfilesfrompackage() {
+	# search in all package installed
+	# for the selection,  search the files of them
+	# ls the files selection
+	yay -Q|fzf --preview='yay -Ql {1}' --accept-nth='{1}' --multi|xargs yay -Ql|fzf --sync --accept-nth='{2}' --multi|xargs ls -l
+}
+fyayorphan(){
+	# find all orphans packages and list the selected (for now)
+	yay -Qdt | \
+		fzf --multi --preview 'yay -Qi {1}' --accept-nth='{1}'	--border-label='orphanes packages'
+}
 
+# files search
+#
+fsuid() {
+	find / -type f -perm /u=s 2>/dev/null | xargs exa --color=always -lG|fzf --ansi --preview='man "$(basename {7})"'
+}
+fguid() {
+	find / -type f -perm /g=s 2>/dev/null | xargs exa --color=always -lG|fzf --ansi --preview='man "$(basename {7})"'
+}
+fsticky() {
+	find / -type f -perm /ugo=t 2>/dev/null | xargs exa --color=always -lG|fzf --ansi --preview='man "$(basename {7})"'
+}
 
 
 
