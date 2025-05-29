@@ -3,38 +3,38 @@
 # Installation
 
 ## Function
-fhelp()  
+**fhelp()**  
 	 list all fzf func  
 	 3 first lines of the function must be  
 	 the help  
   
-fman()  
+**fman()**  
 	 search all man  
 	 MAN_PATH : arch linux and other, not every distro has this ENV VAR  
   
-fmank()  
+**fmank()**  
 	 search strings in all man  
 	 $1... strings to search  
   
-fyayOwner()  
+**fyayOwner()**  
 	 search for parckage owner of a file(s)  
 	 args are prequery  
   
-fyayfilesfrompackage()  
+**fyayfilesfrompackage()**  
 	 search in all packages installed  
 	 for the selection,  search the files  
 	 ls the files selection  
   
-fyayorphan()  
+**fyayorphan()**  
 	 find all orphans packages and list the selected (for now)  
   
-fsuid()  
+**fsuid()**  
 	 find all files with suid set (not in root)  
   
-fguid()  
+**fguid()**  
 	 find all files with guid set (not in root)  
 	  
-fsticky()  
+**fsticky()**  
 	 find all directory with stickybit set (not in root)  
 	  
 	  
