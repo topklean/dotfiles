@@ -65,15 +65,15 @@ fzf_scrollbar="│"
 # fzf_ghost="search..."
 
 # default - apply globaly.
-export FZF_DEFAULT_OPTS+=" --ghost=$fzf_ghost"
-export FZF_DEFAULT_OPTS+=" --height=-20%"
-export FZF_DEFAULT_OPTS+=" --min-height=20"
-export FZF_DEFAULT_OPTS+=" --reverse"
-export FZF_DEFAULT_OPTS+=" --border=rounded"
-export FZF_DEFAULT_OPTS+=" --margin=1,2"
-export FZF_DEFAULT_OPTS+=" --cycle"
-export FZF_DEFAULT_OPTS+=' --pointer="'$fzf_pointer'"'
-
+FZF_DEFAULT_OPTS+=" --ghost=$fzf_ghost"
+FZF_DEFAULT_OPTS+=" --height=-20%"
+FZF_DEFAULT_OPTS+=" --min-height=20"
+FZF_DEFAULT_OPTS+=" --reverse"
+FZF_DEFAULT_OPTS+=" --border=rounded"
+FZF_DEFAULT_OPTS+=" --margin=1,2"
+FZF_DEFAULT_OPTS+=" --cycle"
+FZF_DEFAULT_OPTS+=' --pointer="'$fzf_pointer'"'
+export FZF_DEFAULT_OPTS
 
 # File search
 # themings and style
@@ -85,15 +85,15 @@ fzf_file_marker=' ✓'  # ✓
 fzf_file_separator="─"
 fzf_file_scrollbar="│"
 
-export FZF_CTRL_T_OPTS+=' --style full'
-export FZF_CTRL_T_OPTS+=' --info="right"'
-export FZF_CTRL_T_OPTS+=' --border-label=" '$fzf_file_label' "'
-export FZF_CTRL_T_OPTS+=' --prompt="'$fzf_file_prompt'"'
-export FZF_CTRL_T_OPTS+=' --pointer="'$fzf_file_pointer'"'
-export FZF_CTRL_T_OPTS+=' --marker="'$fzf_file_marker'"'
-export FZF_CTRL_T_OPTS+=' --separator="'$fzf_file_separator'"'
-export FZF_CTRL_T_OPTS+=' --walker="file,dir,hidden,follow"'
-
+FZF_CTRL_T_OPTS+=' --style full'
+FZF_CTRL_T_OPTS+=' --info="right"'
+FZF_CTRL_T_OPTS+=' --border-label=" '$fzf_file_label' "'
+FZF_CTRL_T_OPTS+=' --prompt="'$fzf_file_prompt'"'
+FZF_CTRL_T_OPTS+=' --pointer="'$fzf_file_pointer'"'
+FZF_CTRL_T_OPTS+=' --marker="'$fzf_file_marker'"'
+FZF_CTRL_T_OPTS+=' --separator="'$fzf_file_separator'"'
+FZF_CTRL_T_OPTS+=' --walker="file,dir,hidden,follow"'
+export FZF_CTRL_T_OPTS
 # export FZF_CTRL_T_OPTS=$FZF_CTRL_T_OPTS' --style full --prompt="$ " --marker="+" --pointer="►" --separator="─" -scrollbar="│" --info="right"'
 
 # add file info
@@ -113,16 +113,16 @@ fzf_cd_label="cd"
 fzf_cd_marker=$fzf_marker
 fzf_cd_pointer=$fzf_pointer
 
-export FZF_ALT_C_OPTS=$FZF_DEFAULT_OPTS
-export FZF_ALT_C_OPTS+=' --style minimal'
-export FZF_ALT_C_OPTS+=' --border-label=" '$fzf_cd_label' "'
-export FZF_ALT_C_OPTS+=' --ghost="'${fzf_cd_ghost:-$fzf_ghost}'"'
-export FZF_ALT_C_OPTS+=' --prompt="$ "'
-export FZF_ALT_C_OPTS+=' --marker="'$fzf_cd_marker'"'
-export FZF_ALT_C_OPTS+=' --pointer="'$fzf_cd_pointer'"'
-export FZF_ALT_C_OPTS+=' --separator="─"'
-export FZF_ALT_C_OPTS+=' --info="inline-right"'
-
+FZF_ALT_C_OPTS=$FZF_DEFAULT_OPTS
+FZF_ALT_C_OPTS+=' --style minimal'
+FZF_ALT_C_OPTS+=' --border-label=" '$fzf_cd_label' "'
+FZF_ALT_C_OPTS+=' --ghost="'${fzf_cd_ghost:-$fzf_ghost}'"'
+FZF_ALT_C_OPTS+=' --prompt="$ "'
+FZF_ALT_C_OPTS+=' --marker="'$fzf_cd_marker'"'
+FZF_ALT_C_OPTS+=' --pointer="'$fzf_cd_pointer'"'
+FZF_ALT_C_OPTS+=' --separator="─"'
+FZF_ALT_C_OPTS+=' --info="inline-right"'
+export FZF_ALT_C_OPTS
 # preview window in file search
 export FZF_ALT_C_OPTS+=' --ansi --preview="tree -aC {}"'
 export FZF_ALT_C_OPTS+=' --preview-window="hidden,right,<50(down,40%)"'
@@ -135,16 +135,16 @@ fzf_history_label="history"
 fzf_history_marker=$fzf_marker
 fzf_history_pointer=$fzf_pointer
 
-export FZF_CTRL_R_OPTS=$FZF_DEFAULT_OPTS
-export FZF_CTRL_R_OPTS+=' --style minimal'
-export FZF_CTRL_R_OPTS+=' --border-label=" '$fzf_history_label' "'
-export FZF_CTRL_R_OPTS+=' --ghost="'${fzf_history_ghost:-$fzf_ghost}'"'
-export FZF_CTRL_R_OPTS+=' --prompt="$ "'
-export FZF_CTRL_R_OPTS+=' --marker="'$fzf_history_marker'"'
-export FZF_CTRL_R_OPTS+=' --pointer="'$fzf_history_pointer'"'
-export FZF_CTRL_R_OPTS+=' --separator="─"'
-export FZF_CTRL_R_OPTS+=' --info="inline-right"'
-
+FZF_CTRL_R_OPTS=$FZF_DEFAULT_OPTS
+FZF_CTRL_R_OPTS+=' --style minimal'
+FZF_CTRL_R_OPTS+=' --border-label=" '$fzf_history_label' "'
+FZF_CTRL_R_OPTS+=' --ghost="'${fzf_history_ghost:-$fzf_ghost}'"'
+FZF_CTRL_R_OPTS+=' --prompt="$ "'
+FZF_CTRL_R_OPTS+=' --marker="'$fzf_history_marker'"'
+FZF_CTRL_R_OPTS+=' --pointer="'$fzf_history_pointer'"'
+FZF_CTRL_R_OPTS+=' --separator="─"'
+FZF_CTRL_R_OPTS+=' --info="inline-right"'
+export FZF_CTRL_R_OPTS
 
 # function
 #	all will be prefixed with f
@@ -167,14 +167,16 @@ __check_cmd() {
 #get list of func available
 fhelp() {
 	# list all fzf func
-	# 3 first lines of the function must be
+	# first 3 lines of the function must be
 	# the help
 	__label="fzf help functions"
 	__fzf_profile="$HOME/.config/fzf/.fzf_profile"
 #     set -x
 	[[ $1 == list ]] && { grep -Pi -A3 '^f[^_\s]+(?= {$)' $__fzf_profile|tr -d '{'; return 0; }
 #     set +x
-	grep -Poi '^f[^_\s]+(?=\(\) {$)' "$__fzf_profile" | fzf --border-label=" $__label " --preview='grep -Pi -A3 {}"(?=\()" '$__fzf_profile' 2>/dev/null | grep -Pio "#.+" '
+grep -Poi '^f[^_\s]+(?=\(\) {$)' "$__fzf_profile" | fzf --border-label=" $__label " --preview='grep -Pi -A3 {}"(?=\()" '$__fzf_profile' 2>/dev/null | grep -Pio "#.+" ' --bind='enter:become(bash -c "/home/topklean/.config/fzf/fzf_run.sh {}")'
+# return to fhelp - buggy for now
+# grep -Poi '^f[^_\s]+(?=\(\) {$)' "$__fzf_profile" | fzf --border-label=" $__label " --preview='grep -Pi -A3 {}"(?=\()" '$__fzf_profile' 2>/dev/null | grep -Pio "#.+" ' --bind='enter:become(bash -c "/home/topklean/.config/fzf/fzf_run.sh {};/home/topklean/.config/fzf/fzf_run.sh {} fhelp")'
 }
 
 # man
@@ -190,17 +192,19 @@ fman() {
 
 	command ls -1 "${MAN_PATH}"/man* | \
 		fzf  --border-label=" $__label " --delimiter \. --with-nth '{1} {2}' --accept-nth '{1}.{2}' --preview="man '{1}.{2}' 2>/dev/null"|\
-		xargs man
+		{ read arg dev_null; [[ $arg ]] && man "$arg"; }
+	
 }
 fmank() {
 	# search strings in all man
 	# $1... strings to search 
 	#
-	(( $# < 1 )) && return 1
+	(( $# < 1 )) && args='.' || args="$*"
 	__label="search strings in man (-k)"
 
-	man -k "$@"|fzf --border-label="$__label" --delimiter '[()-]' --accept-nth='{1}.{2}' --preview="man '{1}.{2}' 2>/dev/null"|xargs man
+	man -k "$args"|fzf --border-label="$__label" --delimiter '[()-]' --accept-nth='{1}.{2}' --preview="man '{1}.{2}' 2>/dev/null"|xargs man
 }
+declare -fx fmank
 
 # arch package search / Management
 fyayOwner() {
@@ -240,18 +244,11 @@ fguid() {
 	__check_cmd
 	find / -type f -perm /g=s 2>/dev/null | xargs $__cmd_ls $__cmd_ls_opts -U|fzf --ansi --preview="man -f $(basename {$__cmd_ls_nth}) 2>/dev/null"
 }
+
 fsticky() {
 	# find all directory with stickybit set (not in root)
 	#
 	#
 	__check_cmd
-	find / -perm -perm /1000 2>/dev/null|xargs $__cmd_ls $__cmd_ls_opts -d
+	find / -perm /1000 2>/dev/null|xargs $__cmd_ls $__cmd_ls_opts -d|fzf  --ansi --preview="tree -aC {}"
 }
-
-
-
-
-
-
-
-

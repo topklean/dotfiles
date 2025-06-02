@@ -447,10 +447,11 @@ mode "$mode_launcher" {
 
 
 hide_edge_borders smart
-default_border pixel 3
+default_border pixel 2
 
 # bindsym $mod+Shift+l exec ~/left.sh
-set $c1 #55CC55
+set $c1 #55ffcc
+# set $c1 #55CC55
 #set $c1 #009BCC
 set $c2 #999999
 # class                 border  bground text    indicator child_border

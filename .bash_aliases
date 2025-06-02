@@ -77,20 +77,14 @@ alias pp='xclip -selection c -o'
 alias pp='xclip -selection c -o'
 alias pp='xclip -selection c -o'
 # alias pause='clear; toilet -w 200 -f pagga < <(echo -e "                                  \npause de 10 mins     \n                                  ")'
-# alias fzf="fzf -i -m --bind='alt-i:up,alt-k:down'"
-# alias fzf='fzf -i --bind=\'alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char\' --height=~50% --reverse --border=rounded --border-label=\"$(lolcat -f<<<$PWD)\" --margin=1,2% --color=dark --preview=\'batcat -l java {+}\''
-# alias fzf="fzf -i --bind='alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char' --height=~50% --reverse --border=rounded --margin=1,2% --color=dark"
-
 # mod exec
 alias x='chmod u+x'
 # python venv
 alias manim_acitvate='. ~/venv/manim/bin/activate'
 alias hgrep='h|& grep'
-# alias pause='Documents/projets/bash/pause/pause_v1.sh'
 alias pause='/home/topklean/Documents/projets/pause/i3.sh >& /dev/null'
 alias pacman='sudo pacman'
 alias feh_pictures='feh -g 1280x720 ~/Pictures'
-
 
 # grep 
 alias grep='grep --color=auto'
@@ -103,5 +97,4 @@ alias ip='ip --color=auto'
 
 # glava for streaming
 alias mic="pkill -f 'polybar.+bas|screenkey'; ( polybar -q bas >&/dev/null & ); (pkill glava; glava -d >&/dev/null &); (pkill screenkey; screenkey &)"
-# alias mic='ps aux | grep [p]olybar|grep [b]as|awk "{print \$2}" | xargs -n1 kill -9;( polybar -q bas >&/dev/null & ); (pkill glava; glava -d >&/dev/null &); (pkill screenkey; screenkey &)'
 alias mic_off="pkill -f 'polybar.+bas|screenkey'"

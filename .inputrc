@@ -1,24 +1,74 @@
 # get the Meta Control syntax
 
+#completion
+set completion-ignore-case on
+set completion-prefix-display-length 5
+# one tab only for completion
+set show-all-if-ambiguous on
+# color cmd prefix
+set colored-completion-prefix on
+# color file completion
+set colored-stats on
 
-set convert-meta on
+# match parenthesis
+set blink-matching-paren on
+
+# mode emacs
+# set editing-mode emacs
+# set keymap emacs-meta
+# set emacs-mode-string (emacs) 
+# set show-mode-in-prompt on
+# set bind-tty-special-chars off
+
+# no tty bind
+# stty -a => ctrl-u/ctrl-w...
+set bind-tty-special-chars off
+
+# to be able to alt - utf8 ???
+# meta-flag synonym of input-meta
+# set meta-flag on
+# set input-meta on
+# set output-meta on
+# set enable-meta-key off
+# problem with this one !!!
+# set convert-meta on
+set convert-meta off
+
+# \C-    control prefix
+# \M-    meta prefix
+# \e     an escape character
+# \\     backslash
+# \"     literal "
+# \'     literal '
 
 # move
-Meta-i: previous-history
-Meta-k: next-history
-Meta-j: backward-char
-Meta-l: forward-char
+"\ei": previous-history
+"\ek": next-history
+"\ej": backward-char
+"\el": forward-char
 
-Meta-Control-j: backward-word
-Meta-Control-l: forward-word
+"\e\C-j": backward-word
+"\e\C-l": forward-word
 
-Meta-o: kill-word
-Meta-u: backward-kill-word
+"\eu": beginning-of-line
+"\eo": end-of-line
 
-Control-o: delete-char
-Control-u: backward-delete-char
-Control-h: kill-whole-line
+# "\C-u": kill-line
+# "\C-o": backward-kill-line
 
-Control-SPACE: accept-line
+"\ex": kill-region
+"\ep": yank
+
+"\C-o": kill-word
+"\C-u": backward-kill-word
+# "\C-u": backward-kill-word
+
+# Control-m: delete-char
+# "\C-h": backward-delete-char
+"\C-k": kill-whole-line
+
+
+# /* Control-SPACE: accept-line */
 # snippet
 # à faire
+"\C-n":"2>/dev/null"
