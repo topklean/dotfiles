@@ -10,20 +10,14 @@ let &t_ut=''
 " pas de compatibilité avec vi
 set nocompatible
 
-set termguicolors
-colorscheme nord
 
 " syntax and file type detection
 syntax enable
 filetype detect
 filetype plugin indent on
+
 " on force par coloration par defaut
 syntax on
-" set foldenable
-" set foldmethod=marker
-" au FileType sh let g:sh_fold_enabled=7
-" au FileType sh let g:is_bash=1
-" au FileType sh set foldmethod=syntax
 
 " buffer, do not unload if hidden.
 set hidden
@@ -42,13 +36,13 @@ set smartindent
 " backspace pour inclure début ligne et tab
 set backspace=indent,eol,start
 
+" search case insensitive
+set ic
+
 " activation de la surbrillance pour la recherche
 set hlsearch
 " recherche incrémental 
 set incsearch
-
-" entete de lignes (colones)
-set foldcolumn=2
 
 " wildmenu // menu dans la barre de status pour completion avec tab
 set wildchar=<Tab> wildmenu wildmode=full
@@ -65,6 +59,7 @@ set number
 
 " pratique pour les motions
 set relativenumber
+
 " activer les numéros de lignes relatives uniquement si focus
 augroup numbertoggle
 	autocmd!
@@ -119,35 +114,66 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:�
 "set listchars=eol:¶,space:·,lead:•,trail:•,nbsp:◇,tab:→\ ,extends:▸,precedes:◂,leadmultispace:\│\ \ \ ,
 set nolist
 
-" ligne de fold.
+" line de fold.
 set foldtext=MyFoldText()
 function! MyFoldText()
-	let separateur = ' | '
-	let line1 = getline(v:foldstart)
-	if line1 =~ "^#"
-		let mytext = substitute(line1,'^#\ *','','')
-		let line2 = getline(v:foldstart+1)
-		if line2 =~ '^# *' && strlen(substitute(line2,'^#\ *','','')) > 0
-			let mytext = mytext.separateur.substitute(line2,'^#\ *','','')
-		endif
+"     let separateur = ' │'
+	let separateur = ' '
+	let line = getline(v:foldstart)
+
+	" comments (bash, lua, vim, basic, c like)
+	if line =~ '\v^(#|--|"|rem|/\*|//)'
+		let mytext = substitute(line,'^\v^(#|--|"|rem|/\*|//)\ *','','')
+		let line1 = getline(v:foldstart+1)
+	"function
+	elseif line =~ '\v^(fun\w*\s+)?\w+\(\)\s*\{'
+			let mytext = substitute(line, '{.*$','','')
 	else
 		let mytext = getline(v:foldstart)
 	endif
-	let infos = '( '.(v:foldend-v:foldstart + 1).' lines )'
-	return mytext.separateur.infos.separateur
-	" return strpart( mytext, 0, &columns - strlen(infos)).infos
+
+	let infos = '(L:'.(v:foldend-v:foldstart + 1).')'
+	return mytext.infos.separateur
+
 endfunction
 
-" séparteur de fenêtre 
-set fillchars+=vert:│
+" function to open on left and right motion (with my remap, the default do
+" not work
 
-"activation/desactivation du paste
+
+
+
+set foldenable
+
+" entete de lignes (colones)
+set foldcolumn=2
+
+set fillchars+=fold:▀
+set fillchars+=foldclose:►
+set fillchars+=foldopen:┌
+set fillchars+=foldsep:│
+
+" au FileType sh let g:sh_fold_enabled=7
+" au FileType sh let g:is_bash=1
+" set foldmethod=marker
+au FileType go set foldmethod=syntax
+au FileType go set foldnestmax=1
+" au FileType go set foldopen=all
+au FileType go set foldlevel=1
+
+" séparteur de fenêtre, fold, etc..
+set fillchars+=vert:║
+
+" for lsp
+" set foldmethod=expr
+" set foldexpr=lsp#ui#vim#folding#foldexpr()
+" set foldtext=lsp#ui#vim#folding#foldtext()
+
 "set paste
 "set pastetoggle=tk
 
 " no spell by default
 set nospell
-
 
 " rust
 " let g:rust_fold=2 
@@ -259,33 +285,30 @@ let g:netrw_liststyle = 3
 " plugins
 "
 call plug#begin()
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-" Plug 'rust-lang/rust.vim'
-" Plug 'easymotion/vim-easymotion'
-" Plug 'szw/vim-ctrlspace'
 Plug 'scrooloose/nerdtree'
-" Plug 'https://github.com/vim-syntastic/syntastic.git'
-" Plug 'vim-ctrlspace/vim-ctrlspace'
-" Plug 'https://github.com/vim-ctrlspace/vim-ctrlspace.git'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
- 
 Plug 'preservim/nerdcommenter'
-Plug 'dense-analysis/ale'
-" Plug 'preservim/tagbar'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'fladson/vim-kitty'
+Plug 'kien/rainbow_parentheses.vim'
+
+" themes
+Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
+" LSP
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
+Plug 'dense-analysis/ale'
+" Plug 'rhysd/vim-lsp-ale'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'preservim/nerdtree'
-" Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 " Man
 runtime ftplugin/man.vim
+" thems
+set termguicolors
+colorscheme nord
 
 " nerdcommenter
 let g:NERDDefaultAlign='start'
@@ -299,9 +322,9 @@ let g:airline_theme='minimalist'
 let g:airline_powerline_fonts=1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_c_only_filename = 1
-" let g:airline_detect_spell=1
-" let g:airline_detect_spelllang='flag'
-let g:airline#extensions#ctrlspace#enabled=1
+let g:airline_detect_spell=1
+let g:airline_detect_spelllang='flag'
+" let g:airline#extensions#ctrlspace#enabled=1
 let g:CtrlSpaceStatuslineFunction="airline#extensions#ctrlspace#statusline()"
 let g:airline#extensions#fzf#enabled=1
 let g:airline#extensions#syntastic#enabled=1
@@ -322,26 +345,39 @@ let g:fzf_vim = {}
 " let g:fzf_vim = { 'bind': ['alt-i:up,alt-k:down,alt-j:backward-char,alt-l:forward-char'] }
 " let g:fzf_preview_window = ['hidden,right,<50(down,40%)']
 let g:fzf_preview_window = ['hidden,right,<50(down,40%)', 'ctrl-p']
+
 " ALE
+" clangd
+let g:ale_linters = { 'go': ['gopls'] }
+let g:LanguageClient_serverCommands={ 'c': ['clangd'] }
+" let g:ale_c_clangd_options="--background-index -j=4 -log=error --all-scopes-completion --header-insertion=iwyu --header-insertion-decorators --import-insertions --rename-file-limit=0"
+" let g:ale_c_cc_options='-std=c11 -Wall -Wextra -Werror'
+
 let g:ale_pattern_options_enabled=1
 let g:ale_floating_window_border=['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 let g:ale_cursor_detail=1
 let g:ale_virtualtext_cursor=1
 let g:ale_detail_to_floating_preview=1
 
-" clangd
-let g:LanguageClient_serverCommands={ 'c': ['clangd'] }
-" let g:ale_c_clang_executable = '/usr/bin/clang'
-" let g:ale_c_clangd_executable = '/usr/bin/clangd'
-let g:ale_c_clangd_options="--background-index -j=4 -log=error --all-scopes-completion --header-insertion=iwyu --header-insertion-decorators --import-insertions --rename-file-limit=0"
 let g:ale_completion_enabled=1
 let g:ale_hover_cursor=1
 let g:ale_set_balloons=1
-let g:ale_c_cc_options='-std=c11 -Wall -Wextra -Werror'
 let g:ale_save_hidden=1
 
-let g:ale_linters = { 'go': ['gopls'] }
+" LSP configurations for vim-lsp
+" if executable('gopls')
+"     autocmd User lsp_setup call lsp#register_server({
+"         \   'name': 'gopls',
+"         \   'cmd': ['gopls'],
+"         \   'allowlist': ['go', 'gomod'],
+"         \ })
+" endif
 
+" Set 'vim-lsp' linter " vim-lsp is implicitly active
+" let g:ale_linters = {
+"     \   'go': ['golint'], 
+"     \   'c': ['pretty'], 
+"     \ }
 
 
 " NERDTree
@@ -378,12 +414,13 @@ let g:go_doc_popup_window = 1
 
 """""""""""""""""""
 "                 "
-"    SHORTCUTS    "
+"    map - key    "
 "                 "
 """""""""""""""""""
 
-" inserttion : i => h
+" insertion : i => h
 noremap h i
+
 "  remap Shift Insert
 nnoremap <S-h> <S-i>
 vnoremap <S-h> <S-i>
@@ -405,11 +442,17 @@ noremap <C-j> <Nop>
 " j   l    ←   →
 "   k        ↓
 
-" normal mode
+" normal mode / visual mode
 noremap i <up>
 noremap k <down>
 noremap j <left>
-noremap l <right>
+" no need for this one
+" noremap l <right>
+
+" noremap i k
+" noremap k j
+" noremap j h 
+" noremap l <right>
 
 " with ALT (META) / same as in insert mode 
 nnoremap <M-i> <up>
@@ -478,6 +521,20 @@ map <C-space> <ESC>
 nnoremap <silent>F9 [{
 nnoremap <silent>F10 ][ 
 
+" command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+" cnoremap <C-i> <Up>
+" cnoremap <C-k> <Down>
+" cnoremap <C-j> <Left>
+" cnoremap <C-l> <Right>
+cnoremap <C-j> <S-Left>
+cnoremap <C-l> <S-Right>
+" alt+backspace delete backword
+cnoremap <A-backspace> <C-w>
+" cnoremap <c-k> <C-u
+cnoremap <A-u> <C-w>
+
 " leader key => space / pour les raccourcies
 let mapleader = " "
 
@@ -516,6 +573,7 @@ cnoremap <silent>  :bp<cr>
 
 "nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
+" window
 " Creating splits with empty buffers in all directions
 nnoremap <Leader>wj :leftabove  vnew<CR>
 nnoremap <Leader>wl :rightbelow vnew<CR>
@@ -523,16 +581,46 @@ nnoremap <Leader>wi :leftabove  new<CR>
 nnoremap <Leader>wk :rightbelow new<CR>
 
 " split resize
+" map = <C-w>=
 map + <C-w>+
 map - <C-w>-
+map <C-=> <C-w>2>
+map <C-_> <C-w>2<
+
+" move between splits
+" map <C-W><i> 
+" map <C-W><j>
+" map <C-W><l> 
+" map <C-W><k>
+nnoremap <A-S-i> <C-w>k
+nnoremap <A-S-k> <C-w>j
+nnoremap <A-S-j> <C-w>h
+nnoremap <A-S-l> <C-w>l
+inoremap <A-S-i> <Esc><C-w>ki
+inoremap <A-S-k> <Esc><C-w>ji
+inoremap <A-S-j> <Esc><C-w>hi
+inoremap <A-S-l> <Esc><C-w>li
+vnoremap <A-S-i> <C-w>k
+vnoremap <A-S-k> <C-w>j
+vnoremap <A-S-j> <C-w>h
+vnoremap <A-S-l> <C-w>l
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+
+noremap <C-W><i> :wincmd k
+noremap <C-W><k> :wincmd j
+noremap <C-W><j> :wincmd h
+noremap <C-W><l> :wincmd l
+
+
 
 " shwitch case word (remember the original position. use w as marker)
 "
-nnoremap <silent> <leader>, mwg~iw`w
-nnoremap <silent> <leader>; mwgUiw`w
-nnoremap <silent> <leader>: mwguiw`w
+nnoremap <silent> <leader>~ mwg~iw`w
+nnoremap <silent> <leader>U mwgUiw`w
+nnoremap <silent> <leader>u mwguiw`w
 
-" C dev / gcc / gdb / ...
+" C dev / gcc / gdb / 
 " packadd termdebug
 let g:termdebug_wide = 1
 nnoremap <Leader>dg :Termdebug<CR>
@@ -581,7 +669,7 @@ nnoremap <silent> <S-k> <leader>K
 nnoremap <silent> <leader>cd :lcd %:h<cr>:pwd<cr>
 
 " switch affiche char spéciaux
-map <silent> <leader>ll :set list!<cr>
+map <silent> <leader>list :set list!<cr>
 
 " numpad enter ??? (à vérifier)
 " inoremap  
@@ -601,9 +689,9 @@ nnoremap <leader>O :call append(line('.')-1, '')<CR>
 " inverser deux lettres
 " nnoremap <silent> t xp
 " désactivation F1 parceque gros doigts
-inoremap <silent> <F1> <Nop>    
-nnoremap <silent> <F1> <Nop>    
-vnoremap <silent> <F1> <Nop>    
+inoremap <silent> <F1> <Nop>
+nnoremap <silent> <F1> <Nop>
+vnoremap <silent> <F1> <Nop>
 
 " spell
 nnoremap <silent> <leader>ss :set spell!<cr>
@@ -637,7 +725,6 @@ nnoremap <silent> <C-b> :Buffers<CR>
 let @z='V][zf'
 nnoremap <leader>z @z
 
-
 " ascii art
 vmap <leader>ts :!toilet -w 200 -F border -f standard<CR>
 vmap <leader>tp :!toilet -w 200 -f pagga<CR>
@@ -654,3 +741,9 @@ vmap <leader>tt :!toilet -w 200 -F border -f term<CR>
 " nnoremap  <silent> <leader><F3> ✅
 " nnoremap <silent> <S-F3> ✅
 " vnoremap <silent> <S-F3> <esc>r✅
+
+" replace nbsp by space
+inoremap <silent>   <space>
+
+" line completion
+inoremap <S-TAB> <C-x><C-l>
