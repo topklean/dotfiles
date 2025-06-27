@@ -1,0 +1,320 @@
+# prompt functions
+#
+#
+#
+init_prompt() {
+# PROMPT
+# blank line before exe the command => detach result from the prompt
+PS0='\n'
+
+colors=$(tput colors 2>/dev/null)
+
+(( ${colors:-0} == 256 )) && have_colors=true || have_colors=false
+
+
+# SOME COLORS
+#NORMAL COLORS
+
+RESET='\[\e[0;0m\]'
+BLACK='\[\e[30m\]'
+RED='\[\e[31m\]'
+GREEN='\[\e[32m\]'
+YELLOW='\[\e[33m\]'
+BLUE='\[\e[34m\]'
+MAGENTA='\[\e[35m\]'
+CYAN='\[\e[36m\]'
+WHITE='\[\e[37m\]'
+
+#BRIGHT
+BRIGHT_BLACK='\[\e[90m\]'
+BRIGHT_RED='\[\e[91m\]'
+BRIGHT_GREEN='\[\e[92m\]'
+BRIGHT_YELLOW='\[\e[93m\]'
+BRIGHT_BLUE='\[\e[94m\]'
+BRIGHT_MAGENTA='\[\e[95m\]'
+BRIGHT_CYAN='\[\e[96m\]'
+BRIGHT_WHITE='\[\e[97m\]'
+
+# PERSONNAL
+BLUE_8B_21='\[\e[38;5;21m\]'
+BLUE_8B_27='\[\e[38;5;27m\]'
+BLUE_8B_33='\[\e[38;5;33m\]'
+BLUE_8B_39='\[\e[38;5;39m\]'
+BLUE_8B_45='\[\e[38;5;45m\]'
+BLUE_8B_69='\[\e[38;5;69m\]'
+BLUE_8B_75='\[\e[38;5;75m\]'
+CYAN_8B_81='\[\e[38;5;81m\]' # this one
+GREEN_8B_41='\[\e[38;5;43m\]'
+GREEN_8B_46='\[\e[38;5;46m\]'
+GREEN_8B_47='\[\e[38;5;47m\]'
+GREEN_8B_48='\[\e[38;5;48m\]'
+GREEN_8B_49='\[\e[38;5;49m\]'
+GREEN_8B_70='\[\e[38;5;70m\]'
+GREEN_8B_82='\[\e[38;5;82m\]'
+BLUE_8B_PURPLE_105='\[\e[38;5;105m\]'
+WHITE_8B_255='\e[38;5;255m\]'
+GRAY_8B_239='\[\e[38;5;239m\]'
+GRAY_8B_240='\[\e[38;5;240m\]'
+GRAY_8B_241='\[\e[38;5;241m\]'
+GRAY_8B_242='\[\e[38;5;242m\]'
+GRAY_8B_243='\[\e[38;5;243m\]'
+GRAY_8B_244='\[\e[38;5;244m\]'
+GRAY_8B_245='\[\e[38;5;245m\]'
+GRAY_8B_246='\[\e[38;5;246m\]'
+GRAY_8B_247='\[\e[38;5;247m\]'
+GRAY_8B_248='\[\e[38;5;248m\]'
+RED_8B_126='\[\e[38;5;126m\]'
+RED_8B_128='\[\e[38;5;128m\]'
+RED_8B_134='\[\e[38;5;134m\]'
+RED_8B_160='\[\e[38;5;160m\]'
+RED_8B_161='\[\e[38;5;161m\]'
+RED_8B_163='\[\e[38;5;163m\]'
+RED_8B_164='\[\e[38;5;164m\]'
+RED_8B_165='\[\e[38;5;165m\]'
+RED_8B_170='\[\e[38;5;170m\]'
+RED_8B_196='\[\e[38;5;196m\]'
+RED_8B_197='\[\e[38;5;197m\]'
+RED_8B_198='\[\e[38;5;198m\]'
+RED_8B_199='\[\e[38;5;199m\]'
+RED_8B_200='\[\e[38;5;200m\]'
+RED_8B_206='\[\e[38;5;206m\]'
+RED_8B_207='\[\e[38;5;207m\]'
+PURPLE_8B_174='\[\e[38;5;174m\]'
+
+
+# PROMPT  COLORS
+[[ $have_colors == true && $prompt_colors_want_i == true ]] && {
+
+	USER_CWD_P=$BLUE_8B_69
+	prompt_color_sep=$GREEN_8B_49
+	prompt_color_symbol=$YELLOW
+	prompt_color_user=$USER_CWD_P
+	prompt_color_hostname=$USER_CWD_P
+	prompt_prompt_color=$USER_CWD_P
+
+	prompt_color_cwd=$GRAY_8B_248
+
+	git_color=$GRAY_8B_242
+	git_color_symbol=$BLUE_8B_45
+	git_files_color=$PURPLE_8B_174
+
+	prompt_symbol_fail_color=$RED_8B_207
+	prompt_symbol_fail_prefix_color=$RED_8B_134
+
+} || {
+	:
+	
+#     USER_CWD_P=
+#     prompt_color_sep=
+#     prompt_color_symbol=
+#     prompt_color_user=
+#     prompt_color_hostname=
+#     prompt_prompt_color=
+
+#     prompt_color_cwd=
+
+#     git_enable=
+#     git_color=
+#     git_color_symbol=
+#     git_files_color=
+
+#     prompt_symbol_fail_color=
+#     prompt_symbol_fail_prefix_color=
+
+}
+
+
+# prompt_symbol_success='🟢'
+# prompt_symbol_fail='🔴' 
+
+# prompt_symbol_fail='◉'
+prompt_symbol_fail='◉'
+
+# symbol
+prompt_symbols+=('🧬')
+prompt_symbols+=('☠︎︎')
+prompt_symbols+=('🥖')
+prompt_symbols+=('👾')
+prompt_symbols+=('🔥')
+prompt_symbols+=('🐧')
+# prompt_symbols+=('🖕')
+prompt_symbols+=('☠')
+prompt_symbols+=('👽')
+prompt_symbols+=('😏')
+prompt_symbols+=('🧠')
+prompt_symbols+=('🤢')
+prompt_symbols+=('🌐')
+prompt_symbols+=('👿')
+# random symbol
+prompt_symbol='${prompt_symbols[$SRANDOM % ${#prompt_symbols[@]}]}'
+
+# GIT PROMPT
+[[ $prompt_git_want_i == true ]] && {
+git_symbols+=('𖣂︎')
+git_symbols+=('𖤝')
+# git_symbols+=('🌱')
+git_symbols+=('')
+git_symbols+=('𖦥')
+git_symbols+=('')
+# random symbol
+git_symbol='${git_symbols[$SRANDOM % ${#git_symbols[@]}]}'
+
+# using var $last used to return user cmd
+git_inside='$(git rev-parse --is-inside-work-tree 2>/dev/null)'
+
+git_branch='$(last=$?;'$git_inside' && git -P branch 2>/dev/null| { while read -r b ; do [[ $b =~ ^\* ]] && printf " ${b##\* }"; done; }; exit $last)'
+git_branch="$git_color$git_branch"
+
+git_files_change='$('$git_inside' && git status -s -uno 2>/dev/null|wc -l|| printf 0)'
+git=$git_branch'$(last=$?; (( '$git_files_change' != 0 )) && printf "'$git_color_symbol' '$git_symbol' '$git_files_color$git_files_change$git_color'"; exit $last)'
+}
+
+
+# LAST COMMAND EXIT STATUS
+[[ $prompt_status_want_i = true ]] && { 
+last_cmd_status='$( last=$?; (( last == 0 )) && { exit 0; } || { printf "'$prompt_symbol_fail$prompt_symbol_fail_color' $last '$prompt_color_sep$prompt_symbol_fail' "; exit $last;})'
+}
+
+# show max 2 directories 
+PROMPT_DIRTRIM=2
+
+ PS1=$prompt_color_sep'┌──('
+PS1+=$prompt_color_user'\u'
+PS1+=$prompt_color_symbol$prompt_symbol
+PS1+=$prompt_color_hostname'\h'
+PS1+=$prompt_color_sep')'
+PS1+=$prompt_color_sep'['
+PS1+=$prompt_color_cwd'\w'
+PS1+=$prompt_color_sep']'
+PS1+=$git
+PS1+='\n'
+PS1+=$prompt_color_sep'└─'
+PS1+=$last_cmd_status
+PS1+=$prompt_prompt_color'\$ '
+PS1+=$RESET
+
+PS2=$GRAY_8B_239'> '$RESET
+
+# DISPLAY before prompt
+PROMPT_COMMAND=( 'printf "\n"' )
+PROMPT_COMMAND+=( 'printf "\e[0;35m─\e[0m%.0s" $(seq -s" " 1 $(( $COLUMNS-1 )) )' )
+PROMPT_COMMAND+=( 'printf "\n"' )
+
+# PS4 prompt: mode trace (debug)
+PS4='» '
+
+# clean
+	unset USER_CWD_P
+	unset prompt_color_sep
+	unset prompt_color_symbol
+	unset prompt_color_user
+	unset prompt_color_hostname
+	unset prompt_prompt_color
+	unset prompt_color_cwd
+	unset git_enable
+	unset git_color
+	unset git_color_symbol
+	unset git_files_color
+
+	unset prompt_symbol_fail_color
+	unset prompt_symbol_fail_prefix_color
+
+}
+
+
+prompt_clean() {
+unset BLACK
+unset BLUE
+unset BLUE_8B_21
+unset BLUE_8B_27
+unset BLUE_8B_33
+unset BLUE_8B_39
+unset BLUE_8B_45
+unset BLUE_8B_69
+unset BLUE_8B_75
+unset BLUE_8B_PURPLE_105
+unset BRIGHT_BLACK
+unset BRIGHT_BLUE
+unset BRIGHT_CYAN
+unset BRIGHT_GREEN
+unset BRIGHT_MAGENTA
+unset BRIGHT_RED
+unset BRIGHT_WHITE
+unset BRIGHT_YELLOW
+unset color
+unset colors
+unset CYAN
+unset CYAN_8B_81
+unset fzf_profile
+unset git
+unset git_branch
+unset git_color
+unset git_color_symbol
+unset git_enable
+unset git_files_change
+unset git_files_color
+unset git_inside
+unset git_symbol
+unset GRAY_8B_239
+unset GRAY_8B_240
+unset GRAY_8B_241
+unset GRAY_8B_242
+unset GRAY_8B_243
+unset GRAY_8B_244
+unset GRAY_8B_245
+unset GRAY_8B_246
+unset GRAY_8B_247
+unset GRAY_8B_248
+unset GREEN
+unset GREEN_8B_41
+unset GREEN_8B_46
+unset GREEN_8B_47
+unset GREEN_8B_48
+unset GREEN_8B_49
+unset GREEN_8B_70
+unset GREEN_8B_82
+unset have_colors
+unset i_want_prompt_colors
+unset last
+unset last_cmd_status
+unset MAGENTA
+unset nbsp_disable
+unset prompt_color_cwd
+unset prompt_color_hostname
+unset prompt_color_sep
+unset prompt_colors_want_i
+unset prompt_color_symbol
+unset prompt_color_user
+unset prompt_prompt_color
+unset prompt_symbol
+unset prompt_symbol_fail
+unset prompt_symbol_fail_color
+unset prompt_symbol_fail_prefix_color
+unset prompt_symbol_success
+unset PURPLE_8B_174
+unset RED
+unset RED_8B_126
+unset RED_8B_128
+unset RED_8B_134
+unset RED_8B_160
+unset RED_8B_161
+unset RED_8B_163
+unset RED_8B_164
+unset RED_8B_165
+unset RED_8B_170
+unset RED_8B_196
+unset RED_8B_197
+unset RED_8B_198
+unset RED_8B_199
+unset RED_8B_200
+unset RED_8B_206
+unset RED_8B_207
+unset RESET
+unset USER_CWD_P
+unset VISUAL
+unset WHITE
+unset WHITE_8B_255
+unset YELLOW
+# unset prompt_symbols
+# unset git_symbols
+}

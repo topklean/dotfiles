@@ -46,6 +46,7 @@ init_shell() {
 # altgr+| suivi de espace, parfois espace
 #
 #     setxkbmap -option "nbsp:none"
+
 # set -x
 #     [[ $XDG_SESSION_TYPE =~ [xX](11|[oO][rR][gG]) && $nbsp_disable == true ]] && setxkbmap -option "nbsp:none"
 #     set +x
@@ -69,7 +70,7 @@ export LESS='-i --incsearch --use-color --color=S232.195'
 export VISUAL="$(which vim)"
 FCEDIT=vim
 
-# git
+# git, display all completion
 export GIT_COMPLETION_SHOW_ALL=1
 }
 

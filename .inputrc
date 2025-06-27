@@ -3,10 +3,13 @@
 #completion
 set completion-ignore-case on
 set completion-prefix-display-length 5
+
 # one tab only for completion
 set show-all-if-ambiguous on
+
 # color cmd prefix
 set colored-completion-prefix on
+
 # color file completion
 set colored-stats on
 
